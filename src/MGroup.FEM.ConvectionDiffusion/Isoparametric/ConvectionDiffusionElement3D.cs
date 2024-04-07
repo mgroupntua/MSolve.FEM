@@ -8,14 +8,12 @@ using MGroup.MSolve.Numerics.Interpolation.Jacobians;
 using MGroup.LinearAlgebra.Matrices;
 using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.Meshes;
 
 namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 {
-	public class ConvectionDiffusionElement3D : IConvectionDiffusionElementType, ICell<INode>
+	public class ConvectionDiffusionElement3D : IConvectionDiffusionElementType
 	{
 		private readonly static IDofType[] nodalDOFTypes = new IDofType[] { ConvectionDiffusionDof.UnknownVariable};
 		private readonly IDofType[][] dofTypes;

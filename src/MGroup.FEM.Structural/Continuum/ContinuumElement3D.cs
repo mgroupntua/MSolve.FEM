@@ -9,17 +9,14 @@ using MGroup.MSolve.Numerics.Interpolation.Jacobians;
 using MGroup.LinearAlgebra.Matrices;
 using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.Meshes;
 using MGroup.MSolve.Geometry.Coordinates;
 using MGroup.LinearAlgebra.Vectors;
 using MGroup.MSolve.DataStructures;
 using MGroup.MSolve.Constitutive;
 using System.Linq;
 using MGroup.LinearAlgebra.Providers;
-using MGroup.Constitutive.Structural.Providers;
 
 namespace MGroup.FEM.Structural.Continuum
 {
@@ -28,7 +25,7 @@ namespace MGroup.FEM.Structural.Continuum
 	/// the appropriate <see cref="IIsoparametricInterpolation3D_OLD"/>, <see cref="IQuadrature3D"/> etc. strategies. 
 	/// Authors: Dimitris Tsapetis
 	/// </summary>
-	public class ContinuumElement3D : IStructuralElementType, ICell<INode>
+	public class ContinuumElement3D : IStructuralElementType
 	{
 		private readonly static IDofType[] nodalDOFTypes = new IDofType[]
 		{

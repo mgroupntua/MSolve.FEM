@@ -10,16 +10,14 @@ using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
 using MGroup.MSolve.Discretization.Embedding;
 using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Meshes;
 using MGroup.MSolve.Geometry.Coordinates;
 using MGroup.MSolve.DataStructures;
 
 //TODO: Is there any point in having different material properties per Gauss point?
 namespace MGroup.FEM.Thermal.Isoparametric
 {
-	public class ThermalElement2D : IThermalElementType, IEmbeddedHostElement, ICell<INode>
+	public class ThermalElement2D : IThermalElementType, IEmbeddedHostElement
 	{
 		private readonly IDofType[][] dofTypes; //TODO: this should not be stored for each element. Instead store it once for each Quad4, Tri3, etc. Otherwise create it on the fly.
 		private readonly IThermalProperties material;

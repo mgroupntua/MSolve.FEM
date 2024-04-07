@@ -7,15 +7,13 @@ using MGroup.MSolve.Numerics.Interpolation.Jacobians;
 using MGroup.LinearAlgebra.Matrices;
 using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.Meshes;
 using MGroup.MSolve.DataStructures;
 
 namespace MGroup.FEM.Thermal.Isoparametric
 {
-	public class ThermalElement3D : IThermalElementType, ICell<INode>
+	public class ThermalElement3D : IThermalElementType
 	{
 		private readonly static IDofType[] nodalDOFTypes = new IDofType[] { ThermalDof.Temperature };
 		private readonly IDofType[][] dofTypes; //TODO: this should not be stored for each element. Instead store it once for each Quad4, Tri3, etc. Otherwise create it on the fly.

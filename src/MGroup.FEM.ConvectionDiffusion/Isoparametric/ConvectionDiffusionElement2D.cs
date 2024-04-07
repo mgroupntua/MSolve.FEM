@@ -11,15 +11,13 @@ using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
 using MGroup.MSolve.Discretization.Embedding;
 using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Meshes;
 using MGroup.MSolve.Geometry.Coordinates;
 
 
 namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 {
-	public class ConvectionDiffusionElement2D : IConvectionDiffusionElementType, IEmbeddedHostElement, ICell<INode>
+	public class ConvectionDiffusionElement2D : IConvectionDiffusionElementType, IEmbeddedHostElement
 	{
 		private readonly IDofType[][] dofTypes;
 		private readonly IConvectionDiffusionProperties material;

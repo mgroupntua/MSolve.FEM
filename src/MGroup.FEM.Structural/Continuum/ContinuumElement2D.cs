@@ -8,11 +8,9 @@ using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
 using MGroup.MSolve.Numerics.Interpolation.Jacobians;
 using MGroup.LinearAlgebra.Matrices;
 using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Discretization.BoundaryConditions;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Entities;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.Meshes;
 using MGroup.MSolve.Geometry.Coordinates;
 using MGroup.MSolve.DataStructures;
 using System.Linq;
@@ -37,7 +35,7 @@ namespace MGroup.FEM.Structural.Continuum
 	/// of this element is uniform, therefore it is necessary to use finer meshes to simulate domains with variable thickness.
 	/// Authors: Serafeim Bakalakos
 	/// </summary>
-	public class ContinuumElement2D : IStructuralElementType, ICell<INode>
+	public class ContinuumElement2D : IStructuralElementType
 	{
 		private readonly static IDofType[] nodalDOFTypes = new IDofType[] { StructuralDof.TranslationX, StructuralDof.TranslationY };
 		private readonly IDofType[][] dofTypes; //TODO: this should not be stored for each element. Instead store it once for each Quad4, Tri3, etc. Otherwise create it on the fly.
