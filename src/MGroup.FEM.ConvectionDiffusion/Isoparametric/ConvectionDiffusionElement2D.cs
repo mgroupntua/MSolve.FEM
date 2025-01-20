@@ -13,6 +13,7 @@ using MGroup.MSolve.Discretization.Embedding;
 using MGroup.MSolve.Discretization.Entities;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Geometry.Coordinates;
+using MGroup.LinearAlgebra.Implementations;
 
 
 namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
@@ -111,7 +112,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 			}
 
 			capacity.ScaleIntoThis(material.CapacityCoeff * Thickness);
-			capacity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			capacity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return capacity;
 		}
 
@@ -142,7 +143,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 				diffusion.AxpyIntoThis(partialK, dA);
 			}
 			diffusion.ScaleIntoThis(material.DiffusionCoeff * Thickness);
-			diffusion.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			diffusion.MatrixSymmetry = MatrixSymmetry.Symmetric;
 
 			return diffusion;
 		}
@@ -179,7 +180,9 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 
 				convection.AxpyIntoThis(partialConvectionMatrix, dA * Thickness);
 			}
-			convection.MatrixSymmetry = material.ConvectionCoeff[0] == 0 && material.ConvectionCoeff[1] == 0 ? LinearAlgebra.Providers.MatrixSymmetry.Symmetric : LinearAlgebra.Providers.MatrixSymmetry.NonSymmetric;
+			convection.MatrixSymmetry = material.ConvectionCoeff[0] == 0 && material.ConvectionCoeff[1] == 0 ?
+				MatrixSymmetry.Symmetric :
+				MatrixSymmetry.NonSymmetric;
 			return convection;
 		}
 
@@ -202,7 +205,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 			}
 
 			production.ScaleIntoThis(material.DependentSourceCoeff * (-1d) * Thickness);
-			production.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			production.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return production;
 		}
 

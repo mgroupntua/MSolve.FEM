@@ -8,6 +8,7 @@ using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Embedding;
 using MGroup.MSolve.Discretization.Entities;
+using MGroup.LinearAlgebra.Implementations;
 
 namespace MGroup.FEM.ConvectionDiffusion.Line
 {
@@ -89,7 +90,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Line
 			double coeff = material.CapacityCoeff * Length;
 			double[,] firstTimeDerMatrix = { { coeff / 3d, coeff / 6d }, { coeff / 6d, coeff / 3d } };
 			var matrix = Matrix.CreateFromArray(firstTimeDerMatrix);
-			matrix.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			matrix.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return matrix;
 		}
 
@@ -99,7 +100,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Line
 
 			double[,] diffusionMatrix = { { coeff, -coeff }, { -coeff, coeff } };
 			var matrix = Matrix.CreateFromArray(diffusionMatrix);
-			matrix.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			matrix.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return matrix;
 
 		}
@@ -109,7 +110,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Line
 			double coeff = material.ConvectionCoeff[0] * CrossSectionArea;
 			double[,] convectionMatrix = { { -coeff / 2d, coeff / 2d }, { -coeff / 2d, coeff / 2d } };
 			var matrix = Matrix.CreateFromArray(convectionMatrix);
-			matrix.MatrixSymmetry = material.ConvectionCoeff[0] == 0 ? LinearAlgebra.Providers.MatrixSymmetry.Symmetric : LinearAlgebra.Providers.MatrixSymmetry.NonSymmetric;
+			matrix.MatrixSymmetry = material.ConvectionCoeff[0] == 0 ? MatrixSymmetry.Symmetric : MatrixSymmetry.NonSymmetric;
 			return matrix;
 		}
 
@@ -118,7 +119,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Line
 			double coeff = material.DependentSourceCoeff * (-1d) * CrossSectionArea * Length;
 			double[,] productionMatrix = { { coeff / 3d, coeff / 6d }, { coeff / 6d, coeff / 3d } };
 			var matrix = Matrix.CreateFromArray(productionMatrix);
-			matrix.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			matrix.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return matrix;
 		}
 

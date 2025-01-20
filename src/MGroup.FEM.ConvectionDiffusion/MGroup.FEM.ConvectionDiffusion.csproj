@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MGroup.Constitutive.ConvectionDiffusion" Version="0.2.0-unstable.73" />
+    <PackageReference Include="MGroup.Constitutive.ConvectionDiffusion" Version="0.2.0-unstable.77" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
   </ItemGroup>
 

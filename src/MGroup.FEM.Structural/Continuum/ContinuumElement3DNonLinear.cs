@@ -14,7 +14,7 @@ using MGroup.LinearAlgebra.Vectors;
 using System.Linq;
 using MGroup.MSolve.DataStructures;
 using MGroup.MSolve.Constitutive;
-using MGroup.LinearAlgebra.Providers;
+using MGroup.LinearAlgebra.Implementations;
 using MGroup.Constitutive.Structural.Transient;
 using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
 

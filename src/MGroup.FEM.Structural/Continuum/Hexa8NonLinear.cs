@@ -1,23 +1,24 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using MGroup.Constitutive.Structural;
-using MGroup.MSolve.Numerics.Interpolation.Jacobians;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.Constitutive.Structural.Continuum;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Embedding;
-using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.BoundaryConditions;
-using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Numerics.Interpolation;
-using MGroup.MSolve.DataStructures;
-using MGroup.MSolve.Constitutive;
-using MGroup.LinearAlgebra.Providers;
-
 namespace MGroup.FEM.Structural.Continuum
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+
+	using MGroup.Constitutive.Structural;
+	using MGroup.Constitutive.Structural.Continuum;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.MSolve.Constitutive;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.BoundaryConditions;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Embedding;
+	using MGroup.MSolve.Discretization.Entities;
+	using MGroup.MSolve.Numerics.Integration.Quadratures;
+	using MGroup.MSolve.Numerics.Interpolation;
+	using MGroup.MSolve.Numerics.Interpolation.Jacobians;
+
 	/// <summary>
 	/// Continuum finite Element for 3d problems with material and geometric nonlinearities
 	/// Authors: Gerasimos Sotiropoulos

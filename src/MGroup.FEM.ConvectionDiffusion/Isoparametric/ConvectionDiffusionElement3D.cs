@@ -10,6 +10,7 @@ using MGroup.MSolve.Discretization;
 using MGroup.MSolve.Numerics.Integration.Quadratures;
 using MGroup.MSolve.Discretization.Dofs;
 using MGroup.MSolve.Discretization.Entities;
+using MGroup.LinearAlgebra.Implementations;
 
 namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 {
@@ -105,7 +106,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 			}
 			
 			capacity.ScaleIntoThis(material.CapacityCoeff);
-			capacity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			capacity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return capacity;
 		}
 
@@ -135,7 +136,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 				double dA = jacobian.DirectDeterminant * QuadratureForStiffness.IntegrationPoints[gp].Weight;
 				diffusion.AxpyIntoThis(partialK, dA * material.DiffusionCoeff);
 			}
-			diffusion.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			diffusion.MatrixSymmetry = MatrixSymmetry.Symmetric;
 
 			return diffusion;
 		}
@@ -174,11 +175,14 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 
 				convection.AxpyIntoThis(partialConvectionMatrix, dA);
 			}
-			convection.MatrixSymmetry = material.ConvectionCoeff[0] == 0 && material.ConvectionCoeff[1] == 0 && material.ConvectionCoeff[2] == 0 ? LinearAlgebra.Providers.MatrixSymmetry.Symmetric : LinearAlgebra.Providers.MatrixSymmetry.NonSymmetric;
-
+			convection.MatrixSymmetry =
+				material.ConvectionCoeff[0] == 0 && material.ConvectionCoeff[1] == 0 && material.ConvectionCoeff[2] == 0 ?
+				MatrixSymmetry.Symmetric :
+				MatrixSymmetry.NonSymmetric;
 
 			return convection;
 		}
+
 		public Matrix BuildProductionMatrix()
 		{
 			int numDofs = Nodes.Count;
@@ -198,7 +202,7 @@ namespace MGroup.FEM.ConvectionDiffusion.Isoparametric
 			}
 
 			production.ScaleIntoThis(material.DependentSourceCoeff * (-1d));
-			production.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			production.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return production;
 		}
 

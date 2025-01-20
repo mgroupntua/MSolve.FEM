@@ -1,18 +1,20 @@
-using System;
-using System.Collections.Generic;
-using MGroup.Constitutive.Thermal;
-using MGroup.MSolve.Numerics.Interpolation;
-using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
-using MGroup.MSolve.Numerics.Interpolation.Jacobians;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.DataStructures;
-
 namespace MGroup.FEM.Thermal.Isoparametric
 {
+	using System;
+	using System.Collections.Generic;
+
+	using MGroup.Constitutive.Thermal;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Entities;
+	using MGroup.MSolve.Numerics.Integration.Quadratures;
+	using MGroup.MSolve.Numerics.Interpolation;
+	using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
+	using MGroup.MSolve.Numerics.Interpolation.Jacobians;
+
 	public class ThermalElement3D : IThermalElementType
 	{
 		private readonly static IDofType[] nodalDOFTypes = new IDofType[] { ThermalDof.Temperature };
@@ -74,7 +76,7 @@ namespace MGroup.FEM.Thermal.Isoparametric
 
 			//WARNING: the following needs to change for non uniform density. Perhaps the integration order too.
 			capacity.Scale(material.Density * material.SpecialHeatCoeff);
-			capacity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			capacity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return capacity;
 		}
 
@@ -113,7 +115,7 @@ namespace MGroup.FEM.Thermal.Isoparametric
 			}
 
 			conductivity.Scale(1);
-			conductivity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			conductivity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return conductivity;
 		}
 

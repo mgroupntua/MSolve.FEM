@@ -1,22 +1,24 @@
-using System;
-using System.Collections.Generic;
-using MGroup.Constitutive.Thermal;
-using MGroup.MSolve.Numerics.Interpolation;
-using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
-using MGroup.MSolve.Numerics.Interpolation.Inverse;
-using MGroup.MSolve.Numerics.Interpolation.Jacobians;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.Embedding;
-using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Geometry.Coordinates;
-using MGroup.MSolve.DataStructures;
-
 //TODO: Is there any point in having different material properties per Gauss point?
 namespace MGroup.FEM.Thermal.Isoparametric
 {
+	using System;
+	using System.Collections.Generic;
+
+	using MGroup.Constitutive.Thermal;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Embedding;
+	using MGroup.MSolve.Discretization.Entities;
+	using MGroup.MSolve.Geometry.Coordinates;
+	using MGroup.MSolve.Numerics.Integration.Quadratures;
+	using MGroup.MSolve.Numerics.Interpolation;
+	using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
+	using MGroup.MSolve.Numerics.Interpolation.Inverse;
+	using MGroup.MSolve.Numerics.Interpolation.Jacobians;
+
 	public class ThermalElement2D : IThermalElementType, IEmbeddedHostElement
 	{
 		private readonly IDofType[][] dofTypes; //TODO: this should not be stored for each element. Instead store it once for each Quad4, Tri3, etc. Otherwise create it on the fly.
@@ -83,7 +85,7 @@ namespace MGroup.FEM.Thermal.Isoparametric
 
 			//WARNING: the following needs to change for non uniform density. Perhaps the integration order too.
 			capacity.ScaleIntoThis(Thickness * material.Density * material.SpecialHeatCoeff);
-			capacity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			capacity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return capacity;
 		}
 
@@ -113,7 +115,7 @@ namespace MGroup.FEM.Thermal.Isoparametric
 			}
 
 			conductivity.ScaleIntoThis(Thickness);
-			conductivity.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			conductivity.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return conductivity;
 		}
 

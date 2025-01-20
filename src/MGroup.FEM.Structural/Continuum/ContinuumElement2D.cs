@@ -1,22 +1,3 @@
-using System;
-using System.Collections.Generic;
-using MGroup.Constitutive.Structural;
-using MGroup.Constitutive.Structural.Continuum;
-using MGroup.Constitutive.Structural.Transient;
-using MGroup.MSolve.Numerics.Interpolation;
-using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
-using MGroup.MSolve.Numerics.Interpolation.Jacobians;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Geometry.Coordinates;
-using MGroup.MSolve.DataStructures;
-using System.Linq;
-using MGroup.MSolve.Constitutive;
-using MGroup.LinearAlgebra.Providers;
-
 //TODO: Damping matrix calculation needs redesign for all of MSolve. For this class, see DampingMatrix().
 //TODO: Materials also need redesign. Some properties are the same for all instances of a material class, some are the same for
 //      all Gauss points of an element but differ across elements, some differ per Gauss point but are constant, and others
@@ -29,6 +10,26 @@ using MGroup.LinearAlgebra.Providers;
 //      element's shape is too distorted, midpoints are too close to corners in quadratic elements, etc.
 namespace MGroup.FEM.Structural.Continuum
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+
+	using MGroup.Constitutive.Structural;
+	using MGroup.Constitutive.Structural.Continuum;
+	using MGroup.Constitutive.Structural.Transient;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.MSolve.Constitutive;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Entities;
+	using MGroup.MSolve.Geometry.Coordinates;
+	using MGroup.MSolve.Numerics.Integration.Quadratures;
+	using MGroup.MSolve.Numerics.Interpolation;
+	using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
+	using MGroup.MSolve.Numerics.Interpolation.Jacobians;
+
 	/// <summary>
 	/// Represents a continuum finite element for 2D problems. Specific elements (e.g. Quad4, Tri6, ...) can be created using
 	/// the appropriate <see cref="IIsoparametricInterpolation2D"/>, <see cref="IQuadrature2D"/> etc. strategies. The thickness
