@@ -14,7 +14,7 @@ using System.Linq;
 using MGroup.MSolve.Discretization.Entities;
 using MGroup.MSolve.DataStructures;
 using MGroup.MSolve.Constitutive;
-using MGroup.LinearAlgebra.Providers;
+using MGroup.LinearAlgebra.Implementations;
 
 namespace MGroup.FEM.Structural.Continuum
 {

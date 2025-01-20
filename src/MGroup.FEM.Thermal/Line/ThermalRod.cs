@@ -1,16 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using MGroup.Constitutive.Thermal;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.MSolve.DataStructures;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Embedding;
-using MGroup.MSolve.Discretization.Entities;
-
 namespace MGroup.FEM.Thermal.Line
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+
+	using MGroup.Constitutive.Thermal;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Embedding;
+	using MGroup.MSolve.Discretization.Entities;
+
 	/// <summary>
 	/// Finite element for heat transfer along a single direction. Can be used for 1D, 2D and 3D problems. Does not take into 
 	/// account geometric non-linearities.
@@ -60,7 +62,7 @@ namespace MGroup.FEM.Thermal.Line
 			double kdAL = material.SpecialHeatCoeff * material.Density * CrossSectionArea * Length;
 			double[,] capacity = { { kdAL / 3.0, kdAL / 6.0 }, { kdAL / 6.0, kdAL / 3.0 } };
 			var matrix = Matrix.CreateFromArray(capacity);
-			matrix.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			matrix.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return matrix;
 		}
 
@@ -70,7 +72,7 @@ namespace MGroup.FEM.Thermal.Line
 			double cAoverL = material.ThermalConductivity * CrossSectionArea / Length;
 			double[,] conductivity = { { cAoverL, -cAoverL }, { -cAoverL, cAoverL } };
 			var matrix = Matrix.CreateFromArray(conductivity);
-			matrix.MatrixSymmetry = LinearAlgebra.Providers.MatrixSymmetry.Symmetric;
+			matrix.MatrixSymmetry = MatrixSymmetry.Symmetric;
 			return matrix;
 		}
 

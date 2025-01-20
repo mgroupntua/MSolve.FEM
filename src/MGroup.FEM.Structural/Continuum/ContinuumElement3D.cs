@@ -1,25 +1,26 @@
-using System;
-using System.Collections.Generic;
-using MGroup.Constitutive.Structural;
-using MGroup.Constitutive.Structural.Continuum;
-using MGroup.Constitutive.Structural.Transient;
-using MGroup.MSolve.Numerics.Interpolation;
-using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
-using MGroup.MSolve.Numerics.Interpolation.Jacobians;
-using MGroup.LinearAlgebra.Matrices;
-using MGroup.MSolve.Discretization;
-using MGroup.MSolve.Numerics.Integration.Quadratures;
-using MGroup.MSolve.Discretization.Dofs;
-using MGroup.MSolve.Discretization.Entities;
-using MGroup.MSolve.Geometry.Coordinates;
-using MGroup.LinearAlgebra.Vectors;
-using MGroup.MSolve.DataStructures;
-using MGroup.MSolve.Constitutive;
-using System.Linq;
-using MGroup.LinearAlgebra.Providers;
-
 namespace MGroup.FEM.Structural.Continuum
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+
+	using MGroup.Constitutive.Structural;
+	using MGroup.Constitutive.Structural.Continuum;
+	using MGroup.Constitutive.Structural.Transient;
+	using MGroup.LinearAlgebra.Implementations;
+	using MGroup.LinearAlgebra.Matrices;
+	using MGroup.LinearAlgebra.Vectors;
+	using MGroup.MSolve.Constitutive;
+	using MGroup.MSolve.DataStructures;
+	using MGroup.MSolve.Discretization;
+	using MGroup.MSolve.Discretization.Dofs;
+	using MGroup.MSolve.Discretization.Entities;
+	using MGroup.MSolve.Geometry.Coordinates;
+	using MGroup.MSolve.Numerics.Integration.Quadratures;
+	using MGroup.MSolve.Numerics.Interpolation;
+	using MGroup.MSolve.Numerics.Interpolation.GaussPointExtrapolation;
+	using MGroup.MSolve.Numerics.Interpolation.Jacobians;
+
 	/// <summary>
 	/// Represents a continuum finite element for 3D problems. Specific elements (e.g. Hexa8, Hexa20, ...) can be created using
 	/// the appropriate <see cref="IIsoparametricInterpolation3D_OLD"/>, <see cref="IQuadrature3D"/> etc. strategies. 

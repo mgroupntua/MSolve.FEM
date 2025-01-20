@@ -21,10 +21,10 @@ variables:
 
 steps:
 - task: PowerShell@2
-  displayName: Install gitversion.tool
+  displayName: Install gitversion.tool v5
   inputs:
     targetType: inline
-    script: dotnet tool install --tool-path .. gitversion.tool
+    script: dotnet tool install --tool-path .. gitversion.tool --version 5.*
     pwsh: true
 
 - task: PowerShell@2
